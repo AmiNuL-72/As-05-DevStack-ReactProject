@@ -1,4 +1,5 @@
 import Banner from "./components/Banner"
+import Footer from "./components/Footer"
 import Nav from "./components/Nav"
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
 
       <Nav/>
       <Banner/>
-
+      <Footer/>
 
 
       <button className="btn">
