@@ -1,2 +1,27 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+
+:root {
+  --brand-gradient: linear-gradient(135deg, #f95738 0%, #e11d74 50%, #7c3aed 100%);
+  --brand-gradient-hover: linear-gradient(135deg, #ea4a2b 0%, #cf1265 50%, #6d28d9 100%);
+  --brand-primary: #e11d74;
+}
+
+@utility bg-brand-gradient {
+  background-image: var(--brand-gradient);
+}
+
+@utility bg-brand-gradient-hover {
+  background-image: var(--brand-gradient-hover);
+}
+
+@utility text-brand-gradient {
+  background-image: var(--brand-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility text-brand-primary {
+  color: var(--brand-primary);
+}
