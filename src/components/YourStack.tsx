@@ -34,7 +34,7 @@ const YourStack = ({
             {selectedStack.map((tech) => (
               <div
                 key={tech.id}
-                className="bg-white rounded-xl border border-slate-200 p-3 flex items-center gap-3 shadow-xs justify-between"
+                className="bg-white rounded-xl border border-slate-200 p-3 flex items-center  shadow-xs justify-between"
               >
                 {/* Tech Icon & Info */}
                 <div className="flex items-center gap-3">

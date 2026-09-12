@@ -1,4 +1,7 @@
 import { Suspense, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Nav from "./components/Nav";
 import Banner from "./components/Banner";
 import TechnologiesSection from "./components/TechnologiesSection";
@@ -24,17 +27,25 @@ function App() {
 
   // Add technology to stack
   const handleAddToStack = (tech: Technology) => {
-    if (!selectedStack.some((item) => item.id === tech.id)) {
-      setSelectedStack([...selectedStack, tech]);
+    const alreadyExists = selectedStack.some((item) => item.id === tech.id);
+    if (alreadyExists) {
+      toast.warn(`"${tech.name}" is already in your stack!`);
+      return;
     }
+    setSelectedStack([...selectedStack, tech]);
+    toast.success(`Added ${tech.name} to your stack!`);
   };
 
   // Remove single
   const handleRemove = (id: string) => {
+    const itemToRemove = selectedStack.find((item) => item.id === id);
     const updatedStack = selectedStack.filter((item) => item.id !== id);
     
     setSelectedStack(updatedStack);
     
+    if (itemToRemove) {
+      toast.info(`Removed ${itemToRemove.name} from your stack`);
+    }
   };
 
   //  Remove all 
@@ -42,7 +53,7 @@ function App() {
     if (selectedStack.length === 0) return;
     
     setSelectedStack([]);
-    
+    toast.error("Removed all technologies from your stack");
   };
 
 
@@ -67,6 +78,8 @@ function App() {
       </main>
 
       <Footer />
+
+      <ToastContainer position="bottom-right" autoClose={3000} />
     </div>
   );
 }

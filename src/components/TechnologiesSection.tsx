@@ -21,26 +21,25 @@ const TechnologiesSection = ({
   const technologies: Technology[] = use(techPromise);
 
   return (
-    <section id="technologies" className="w-full py-12">
-      <div className="max-w-7xl mx-auto px-8">
-
+    <section id="technologies" className="w-full py-12 md:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
-        <div className="mb-10">
-          <h2 className="text-3xl font-extrabold text-gray-900">
+        <div className="mb-10 text-left">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
             Explore the{" "}
             <span className="text-brand-gradient">Technologies</span>
           </h2>
-          <p className="mt-2 text-sm text-gray-500">
+          <p className="mt-2 text-sm sm:text-base text-gray-500">
             Pick one technology per category to build your ideal stack.
           </p>
         </div>
 
         {/* Cards (Left) + YourStack (Right) */}
-        <div className="grid grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
           {/* Left */}
-          <div className="col-span-9">
-            <div className="grid grid-cols-3 gap-6">
+          <div className="lg:col-span-8 xl:col-span-9">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {technologies.map((tech) => {
                 const isAdded = selectedStack.some((item) => item.id === tech.id);
 
@@ -57,7 +56,7 @@ const TechnologiesSection = ({
           </div>
 
           {/* Your Stack Sidebar */}
-          <div className="col-span-3">
+          <div className="lg:col-span-4 xl:col-span-3">
             <YourStack 
             selectedStack={selectedStack} 
             handleRemove={handleRemove}

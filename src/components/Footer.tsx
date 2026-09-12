@@ -3,13 +3,13 @@ import Logo from "../assets/logo-text.png";
 const Footer = () => {
   return (
     <footer className="w-full bg-white border-t border-gray-100 pt-16 pb-12 mt-auto">
-      <div className="max-w-7xl mx-auto px-8">
+      <div className="max-w-7xl mx-auto px-4 px-4 sm:px-6 lg:px-8">
         
         {/* Top Footer Content */}
-        <div className="grid grid-cols-12 gap-10 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12">
           
           {/* Brand Block */}
-          <div className="col-span-6 space-y-4 text-left ">
+          <div className="lg:col-span-6 space-y-4 text-left">
             <a href="#">
               <img src={Logo} alt="DevStack Logo" className="h-8 w-auto" />
             </a>
@@ -31,10 +31,10 @@ const Footer = () => {
           </div>
 
           {/* 3 Link Groups: Product, Company, Legal */}
-          <div className="col-span-6 grid grid-cols-3 gap-8 text-left">
+          <div className="lg:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-8 text-left">
             {/* Product */}
             <div>
-              <h4 className="text-xs font-bold uppercase text-gray-900 mb-3">Product</h4>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-gray-900 mb-3">Product</h4>
               <ul className="space-y-2 text-sm text-gray-600">
                 <li><a href="#" className="hover:text-gray-900">Home</a></li>
                 <li><a href="#technologies" className="hover:text-gray-900">Technologies</a></li>
@@ -44,7 +44,7 @@ const Footer = () => {
 
             {/* Company */}
             <div>
-              <h4 className="text-xs font-bold uppercase text-gray-900 mb-3">Company</h4>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-gray-900 mb-3">Company</h4>
               <ul className="space-y-2 text-sm text-gray-600">
                 <li><a href="#about" className="hover:text-gray-900">About</a></li>
                 <li><a href="#contact" className="hover:text-gray-900">Contact</a></li>
@@ -54,7 +54,7 @@ const Footer = () => {
 
             {/* Legal */}
             <div>
-              <h4 className="text-xs font-bold uppercase text-gray-900 mb-3">Legal</h4>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-gray-900 mb-3">Legal</h4>
               <ul className="space-y-2 text-sm text-gray-600">
                 <li><a href="#privacy" className="hover:text-gray-900">Privacy Policy</a></li>
                 <li><a href="#terms" className="hover:text-gray-900">Terms of Service</a></li>
@@ -65,7 +65,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar: Copyright & Quick Links */}
-        <div className="border-t border-gray-100 pt-8 flex items-center justify-between text-sm text-gray-500">
+        <div className="border-t border-gray-100 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-gray-500">
           <p>&copy; 2026 DevStack. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <a href="#privacy" className="hover:text-gray-900">Privacy</a>

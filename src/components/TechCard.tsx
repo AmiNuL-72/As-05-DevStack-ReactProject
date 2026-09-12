@@ -46,7 +46,7 @@ const TechCard = ({ technology, handleAddToStack, isAdded }: TechCardProps) => {
         {/* Title & Description */}
         <div className="mt-4 mb-3">
           <h3 className="text-lg font-bold text-gray-900">{name}</h3>
-          <p className="text-xs text-gray-500 line-clamp-3 mt-1 leading-relaxed">
+          <p className="text-xs sm:text-sm text-gray-500 line-clamp-3 mt-1 leading-relaxed">
             {description}
           </p>
         </div>
@@ -56,13 +56,13 @@ const TechCard = ({ technology, handleAddToStack, isAdded }: TechCardProps) => {
         {/* Category, Difficulty & Rating */}
         <div className="flex items-center justify-between text-xs py-3 border-t border-gray-50 mt-2 mb-4">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-1 font-medium rounded-md bg-gray-100 text-gray-700">
+            <span className="px-2.5 py-1 text-xs font-medium rounded-md bg-gray-100 text-gray-700">
               {category}
             </span>
-            <span className="text-gray-500">{difficulty}</span>
+            <span className="text-gray-500 text-xs">{difficulty}</span>
           </div>
           <div className="flex items-center gap-1 font-semibold text-gray-800">
-            <span className="text-amber-400">★</span>
+            <span className="text-amber-400">&#9733;</span>
             <span>{rating}</span>
           </div>
         </div>
@@ -72,7 +72,7 @@ const TechCard = ({ technology, handleAddToStack, isAdded }: TechCardProps) => {
           type="button"
           disabled={isAdded}
           onClick={() => handleAddToStack(technology)}
-          className={`w-full py-2.5 px-4 text-xs font-semibold rounded-lg transition-all ${
+          className={`w-full py-2.5 px-4 text-xs sm:text-sm font-semibold rounded-lg transition-all ${
             isAdded
               ? "bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed"
               : "bg-[#0d131f] hover:bg-black text-white cursor-pointer active:scale-95"
