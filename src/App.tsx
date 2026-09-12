@@ -1,33 +1,52 @@
-import { Suspense } from "react";
-import type { Technology } from "./types/technology";
+import { Suspense, useState } from "react";
 import Nav from "./components/Nav";
 import Banner from "./components/Banner";
+import TechnologiesSection from "./components/TechnologiesSection";
 import Footer from "./components/Footer";
-import TechList from "./components/TechList";
+import type { Technology } from "./types/technology";
 
 
-const techPromise: Promise<Technology[]> = fetch("/data.json").then((res) =>
-  res.json()
+const techPromise: Promise<Technology[]> = fetch("/data.json").then((res) => {
+  if (!res.ok) throw new Error("Failed to load technologies data");
+  return res.json();
+});
+
+// Loading fallback
+const LoadingSpinner = () => (
+  <div className="max-w-7xl mx-auto px-8 py-20 flex flex-col items-center justify-center gap-3">
+    <div className="w-10 h-10 border-4 border-gray-200 border-t-pink-600 rounded-full animate-spin"></div>
+    <p className="text-gray-500 font-medium text-sm">Loading technologies...</p>
+  </div>
 );
 
 function App() {
+  const [selectedStack, setSelectedStack] = useState<Technology[]>([]);
+
+  const handleAddToStack = (tech: Technology) => {
+    if (!selectedStack.some((item) => item.id === tech.id)) {
+      setSelectedStack([...selectedStack, tech]);
+    }
+  };
+
   return (
-    <>
+    <div className="min-h-screen bg-white text-gray-900 flex flex-col justify-between">
       <Nav />
-      <Banner />
 
-      <main className="max-w-7xl mx-auto px-8 py-12">
-        <h2 className="text-3xl font-bold text-brand-gradient mb-8">All Technologies</h2>
+      <main>
+        <Banner />
 
-    
-        <Suspense fallback={<p className="text-center py-10 text-gray-500">Loading...</p>}>
-          <TechList techPromise={techPromise} />
+        <Suspense fallback={<LoadingSpinner />}>
+          <TechnologiesSection
+            techPromise={techPromise}
+            selectedStack={selectedStack}
+            handleAddToStack={handleAddToStack}
+          />
         </Suspense>
         
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 }
 

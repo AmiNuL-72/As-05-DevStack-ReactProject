@@ -2,9 +2,11 @@ import type { Technology } from "../types/technology";
 
 interface TechCardProps {
   technology: Technology;
+  handleAddToStack: (tech: Technology) => void;
+  isAdded: boolean;
 }
 
-// Badge color 
+// Badge color helper
 const getBadgeColor = (badge: string) => {
   const text = badge.toLowerCase();
   if (text.includes("popular") || text.includes("top") || text.includes("essential")) {
@@ -19,13 +21,19 @@ const getBadgeColor = (badge: string) => {
   return "text-cyan-600 bg-cyan-50 border-cyan-200";
 };
 
-const TechCard = ({ technology }: TechCardProps) => {
+const TechCard = ({ technology, handleAddToStack, isAdded }: TechCardProps) => {
   const { name, category, description, icon, rating, difficulty, badge } = technology;
 
   return (
-    <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md hover:border-gray-200 flex flex-col justify-between h-full transition-all">
+    <div
+      className={`bg-white rounded-2xl p-6 transition-all duration-200 flex flex-col justify-between h-full shadow-sm ${
+        isAdded
+          ? "border-2 border-red-500 ring-2 ring-red-100"
+          : "border border-gray-100 hover:shadow-md hover:border-gray-200"
+      }`}
+    >
       <div>
-        {/* Card Header: Icon & Badge */}
+        {/* Icon & Badge */}
         <div className="flex items-center justify-between">
           <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center p-1.5 border border-gray-100">
             <img src={icon} alt={name} className="w-full h-full object-contain" />
@@ -38,7 +46,7 @@ const TechCard = ({ technology }: TechCardProps) => {
         {/* Title & Description */}
         <div className="mt-4 mb-3">
           <h3 className="text-lg font-bold text-gray-900">{name}</h3>
-          <p className="text-xs sm:text-sm text-gray-500 line-clamp-3 mt-1 leading-relaxed">
+          <p className="text-xs text-gray-500 line-clamp-3 mt-1 leading-relaxed">
             {description}
           </p>
         </div>
@@ -48,12 +56,11 @@ const TechCard = ({ technology }: TechCardProps) => {
         {/* Category, Difficulty & Rating */}
         <div className="flex items-center justify-between text-xs py-3 border-t border-gray-50 mt-2 mb-4">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-1 text-xs font-medium rounded-md bg-gray-100 text-gray-700">
+            <span className="px-2.5 py-1 font-medium rounded-md bg-gray-100 text-gray-700">
               {category}
             </span>
-            <span className="text-gray-500 text-xs">{difficulty}</span>
+            <span className="text-gray-500">{difficulty}</span>
           </div>
-
           <div className="flex items-center gap-1 font-semibold text-gray-800">
             <span className="text-amber-400">★</span>
             <span>{rating}</span>
@@ -63,9 +70,15 @@ const TechCard = ({ technology }: TechCardProps) => {
         {/* Add to Stack Button */}
         <button
           type="button"
-          className="w-full py-2.5 px-4 text-xs sm:text-sm font-semibold rounded-lg bg-[#0d131f] hover:bg-black text-white cursor-pointer active:scale-95 transition-all"
+          disabled={isAdded}
+          onClick={() => handleAddToStack(technology)}
+          className={`w-full py-2.5 px-4 text-xs font-semibold rounded-lg transition-all ${
+            isAdded
+              ? "bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed"
+              : "bg-[#0d131f] hover:bg-black text-white cursor-pointer active:scale-95"
+          }`}
         >
-          Add to Stack
+          {isAdded ? "\u2713 Added to Stack" : "Add to Stack"}
         </button>
       </div>
     </div>
