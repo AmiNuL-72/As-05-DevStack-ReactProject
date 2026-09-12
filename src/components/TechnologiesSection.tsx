@@ -7,12 +7,16 @@ interface TechnologiesSectionProps {
   techPromise: Promise<Technology[]>;
   selectedStack: Technology[];
   handleAddToStack: (tech: Technology) => void;
+  handleRemove: (id: string) => void;
+  handleRemoveAll: () => void;
 }
 
 const TechnologiesSection = ({
   techPromise,
   selectedStack,
   handleAddToStack,
+  handleRemove,
+  handleRemoveAll,
 }: TechnologiesSectionProps) => {
   const technologies: Technology[] = use(techPromise);
 
@@ -37,20 +41,28 @@ const TechnologiesSection = ({
           {/* Left */}
           <div className="col-span-9">
             <div className="grid grid-cols-3 gap-6">
-              {technologies.map((tech) => (
-                <TechCard
-                  key={tech.id}
-                  technology={tech}
-                  handleAddToStack={handleAddToStack}
-                  isAdded={selectedStack.some((item) => item.id === tech.id)}
-                />
-              ))}
+              {technologies.map((tech) => {
+                const isAdded = selectedStack.some((item) => item.id === tech.id);
+
+                return (
+                  <TechCard
+                    key={tech.id}
+                    technology={tech}
+                    handleAddToStack={handleAddToStack}
+                    isAdded={isAdded}
+                  />
+                );
+              })}
             </div>
           </div>
 
           {/* Your Stack Sidebar */}
           <div className="col-span-3">
-            <YourStack selectedStack={selectedStack} />
+            <YourStack 
+            selectedStack={selectedStack} 
+            handleRemove={handleRemove}
+            handleRemoveAll={handleRemoveAll}
+            />
           </div>
 
         </div>

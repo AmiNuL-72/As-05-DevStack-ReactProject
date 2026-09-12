@@ -22,11 +22,30 @@ const LoadingSpinner = () => (
 function App() {
   const [selectedStack, setSelectedStack] = useState<Technology[]>([]);
 
+  // Add technology to stack
   const handleAddToStack = (tech: Technology) => {
     if (!selectedStack.some((item) => item.id === tech.id)) {
       setSelectedStack([...selectedStack, tech]);
     }
   };
+
+  // Remove single
+  const handleRemove = (id: string) => {
+    const updatedStack = selectedStack.filter((item) => item.id !== id);
+    
+    setSelectedStack(updatedStack);
+    
+  };
+
+  //  Remove all 
+  const handleRemoveAll = () => {
+    if (selectedStack.length === 0) return;
+    
+    setSelectedStack([]);
+    
+  };
+
+
 
   return (
     <div className="min-h-screen bg-white text-gray-900 flex flex-col justify-between">
@@ -40,6 +59,8 @@ function App() {
             techPromise={techPromise}
             selectedStack={selectedStack}
             handleAddToStack={handleAddToStack}
+            handleRemove={handleRemove}
+            handleRemoveAll={handleRemoveAll}
           />
         </Suspense>
         

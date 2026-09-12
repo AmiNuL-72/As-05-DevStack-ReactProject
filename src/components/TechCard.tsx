@@ -28,7 +28,7 @@ const TechCard = ({ technology, handleAddToStack, isAdded }: TechCardProps) => {
     <div
       className={`bg-white rounded-2xl p-6 transition-all duration-200 flex flex-col justify-between h-full shadow-sm ${
         isAdded
-          ? "border-2 border-red-500 ring-2 ring-red-100"
+          ? "border-2 border-red-300 ring-2 ring-red-100"
           : "border border-gray-100 hover:shadow-md hover:border-gray-200"
       }`}
     >
